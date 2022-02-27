@@ -1,0 +1,40 @@
+{
+  "name": "ahj-testing",
+  "version": "1.0.0",
+  "description": "Netology homeworks",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "yarn",
+    "start": "forever server.js",
+    "watch": "forever -w server.js"
+  },
+  "engines": {
+    "node": "16.x"
+  },
+  "author": "Aleksandr Shatskih",
+  "license": "ISC",
+  "repository": "https://github.com/errand/ahj-rxjs-server",
+  "dependencies": {
+    "core-js": "^3.20.2",
+    "forever": "^4.0.3",
+    "koa": "^2.13.4",
+    "koa-body": "^4.2.0",
+    "koa-router": "^10.1.1",
+    "koa-static": "^5.0.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.7",
+    "@babel/eslint-parser": "^7.16.5",
+    "@babel/plugin-transform-runtime": "^7.16.8",
+    "@babel/preset-env": "^7.16.8",
+    "@faker-js/faker": "^6.0.0-alpha.7",
+    "babel-jest": "^27.4.6",
+    "babel-loader": "^8.2.3",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-import": "^2.25.4"
+  }
+}
