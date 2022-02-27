@@ -2,12 +2,18 @@
 
 const Koa = require('koa');
 const koaBody = require('koa-body');
+const cors = require('@koa/cors');
 
-const TicketController = require('./src/TicketController');
+const Router = require('koa-router');
 
-const ctrl = new TicketController();
+const router = new Router();
+
+const Faker = require('./src/Faker');
+
+const faker = new Faker();
 
 const app = new Koa();
+app.use(cors());
 const PORT = process.env.PORT || 7070;
 
 app.use(koaBody({
@@ -49,60 +55,17 @@ app.use(async (ctx, next) => {
   }
 });
 
-app.use(async (ctx) => {
-  const { method, id } = ctx.request.query;
-  // console.log(ctx.request.query);
-  switch (method) {
-    case 'createRandomTicket':
-      try {
-        const result = ctrl.createRandomTicket();
-        ctx.response.body = result;
-        return;
-      } catch (err) {
-        console.error(err);
-      }
-    case 'allTickets':
-      try {
-        const result = ctrl.allTickets();
-        ctx.response.body = result;
-      } catch (err) {
-        console.error(err);
-      }
-      return;
-    case 'createTicket':
-      try {
-        const object = ctx.request.body;
+app.use(router.routes());
+app.use(router.allowedMethods());
 
-        const result = ctrl.createTicket(object);
-        ctx.response.body = result;
-      } catch (err) {
-        console.error(err);
-      }
-      return;
-    case 'getTicketById':
-      try {
-        const result = ctrl.getTicketById(id);
-        ctx.response.body = result;
-        console.log(result, 'result');
-      } catch (err) {
-        console.error(err);
-      }
-      return;
-
-    case 'deleteTicket':
-      try {
-        const result = ctrl.deleteTicket(id);
-        console.log(result, 'result');
-        ctx.response.body = result;
-      } catch (err) {
-        console.error(err);
-      }
-      return;
-
-    default:
-      ctx.response.body = `Method "${method}" is not known.`;
-      ctx.response.status = 404;
-  }
+router.get('/messages/unread', async (ctx) => {
+  faker.start();
+  ctx.response.body = JSON.stringify({
+    status: 'ok',
+    messages: faker.messages,
+    timestamp: Date.now(),
+  });
+  console.log(ctx.response.body, 'result');
 });
 
 app.listen(PORT, () => console.log(`Koa server has been started on port ${PORT} ...`));
