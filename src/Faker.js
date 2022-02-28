@@ -23,6 +23,11 @@ class Faker {
     const message = new Ticket(from, subject, body);
 
     this.messages.push(message);
+
+    if (this.messages.length > 15) {
+      this.messages = [];
+      clearTimeout(this.timer);
+    }
   }
 }
 
