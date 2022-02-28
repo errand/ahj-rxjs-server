@@ -27,6 +27,7 @@ app.use(koaBody({
 app.use(async (ctx, next) => {
   const origin = ctx.request.get('Origin');
   if (!origin) {
+    // eslint-disable-next-line no-return-await
     return await next();
   }
 
