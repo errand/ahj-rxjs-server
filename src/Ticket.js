@@ -6,7 +6,7 @@ class Ticket {
     this.from = from;
     this.subject = subject;
     this.body = body;
-    this.received = new Date().toLocaleString();
+    this.received = Date.now();
   }
 }
 

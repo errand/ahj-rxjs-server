@@ -24,7 +24,7 @@ class Faker {
 
     this.messages.push(message);
 
-    if (this.messages.length > 15) {
+    if (this.messages.length > 5) {
       this.messages = [];
       clearTimeout(this.timer);
     }

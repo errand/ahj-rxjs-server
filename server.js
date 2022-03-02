@@ -66,7 +66,7 @@ router.get('/messages/unread', async (ctx) => {
     messages: faker.messages,
     timestamp: Date.now(),
   });
-  console.log(ctx.response.body, 'result');
+  // console.log(ctx.response.body, 'result');
 });
 
 app.listen(PORT, () => console.log(`Koa server has been started on port ${PORT} ...`));
